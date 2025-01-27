@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bgdsec-app
+spec:
+  destination:
+    name: ''
+    namespace: abay-test
+    server: https://kubernetes.default.svc
+  source:
+    path: content/modules/ROOT/examples/bgd
+    repoURL: https://github.com/OpenShiftDemos/openshift-gitops-workshop
+    targetRevision: main
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
